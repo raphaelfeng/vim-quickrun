@@ -108,12 +108,14 @@ function! s:open_result_window(config, session) abort
     setlocal bufhidden=hide buftype=nofile noswapfile nobuflisted
     setlocal fileformat=unix
     let opened = 1
+    execute 'wincmd r'
   elseif bufwinnr(sname) != -1
     execute bufwinnr(sname) 'wincmd w'
   else
     execute sp 'split'
     execute 'buffer' bufnr(sname)
     let opened = 1
+    execute 'wincmd r'
   endif
   if opened
     call a:session.invoke_hook('outputter_buffer_opened')
